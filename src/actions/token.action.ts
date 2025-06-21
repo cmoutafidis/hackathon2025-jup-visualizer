@@ -1,9 +1,12 @@
 import { TAPIResponse, TToken } from '@/types/global';
-import axios from 'axios';
 
 export const getTokens = async (): Promise<TAPIResponse<TToken[]>> => {
   try {
-    const { data } = await axios.get('https://token.jup.ag/all');
+    const response = await fetch('https://token.jup.ag/strict', { next: { revalidate: 3600 } });
+    if (!response.ok) {
+      throw new Error('Failed to fetch tokens');
+    }
+    const data = await response.json();
 
     return {
       success: true,

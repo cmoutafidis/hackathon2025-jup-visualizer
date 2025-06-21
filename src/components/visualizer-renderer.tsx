@@ -16,8 +16,8 @@ const VisualizerRenderer = ({ data }: { data: TSwapQuote }) => {
             </TooltipTrigger>
 
             <TooltipContent
-              className='text-sm max-w-sm p-3 rounded-md border shadow-md bg-white  text-black'
-              tooltipArrowClassName='bg-white fill-white shadow-md'
+              className='text-sm max-w-sm p-3 rounded-md border shadow-md bg-background'
+              tooltipArrowClassName='bg-background fill-background shadow-md'
             >
               <div className='space-y-1'>
                 <div className='font-semibold text-base mb-1'>{item.swapInfo.label}</div>

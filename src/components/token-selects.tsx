@@ -3,29 +3,29 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { TToken } from '@/types/global';
 import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 
-const MintInputs = ({
-  tokens,
-  inputMint,
-  setInputMint,
-  outputMint,
-  setOutputMint,
-}: {
-  tokens: TToken[];
-  inputMint: TToken | undefined;
-  setInputMint: (value: TToken | undefined) => void;
-  outputMint: TToken | undefined;
-  setOutputMint: (value: TToken | undefined) => void;
-}) => {
+const TokenSelects = ({ tokens, searchParams }: { tokens: TToken[]; searchParams: { [key: string]: string | string[] | undefined } }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const inputMint = (searchParams?.inputMint as string) ?? undefined;
+  const outputMint = (searchParams?.outputMint as string) ?? undefined;
+
+  const handleValueChange = (type: 'inputMint' | 'outputMint', value: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set(type, value);
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
   return (
     <div className='space-y-4 border p-4 rounded-xl flex-1'>
       <h1 className='text-lg font-semibold'>Select Token</h1>
       <Select
         onValueChange={(value) => {
-          const token = tokens.find((t) => t.address === value);
-          setInputMint(token);
+          handleValueChange('inputMint', value);
         }}
-        value={inputMint?.address}
+        value={inputMint}
       >
         <SelectTrigger className='w-full py-5'>
           <SelectValue placeholder='Select Input Token' />
@@ -51,10 +51,9 @@ const MintInputs = ({
       </Select>
       <Select
         onValueChange={(value) => {
-          const token = tokens.find((t) => t.address === value);
-          setOutputMint(token);
+          handleValueChange('outputMint', value);
         }}
-        value={outputMint?.address}
+        value={outputMint}
       >
         <SelectTrigger className='w-full py-5'>
           <SelectValue placeholder='Select Output Token' />
@@ -82,4 +81,4 @@ const MintInputs = ({
   );
 };
 
-export default MintInputs;
+export default TokenSelects;

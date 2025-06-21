@@ -1,8 +1,9 @@
+import { ModeToggle } from '@/components/mode-toggle';
 import { Link } from '@/components/ui/link';
 
 const Navbar = () => {
   return (
-    <div className='h-16 border shadow-sm flex justify-center items-center gap-2 bg-white w-full fixed'>
+    <div className='h-16 border shadow-sm flex justify-center items-center gap-2 w-full fixed'>
       <nav className='container mx-auto flex justify-between items-center gap-2'>
         <Link
           href='/'
@@ -10,13 +11,16 @@ const Navbar = () => {
         >
           Jup Visualizer
         </Link>
-        <Link
-          variant='button'
-          href='https://dev.jup.ag/'
-          target='_blank'
-        >
-          API Docs
-        </Link>
+        <div className='flex justify-end items-center gap-4'>
+          <ModeToggle />
+          <Link
+            variant='button'
+            href='https://dev.jup.ag/'
+            target='_blank'
+          >
+            API Docs
+          </Link>
+        </div>
       </nav>
     </div>
   );
