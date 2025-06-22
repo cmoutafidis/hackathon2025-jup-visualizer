@@ -13,15 +13,23 @@ const Visualizer = async ({
   amount: string;
   slippageBps: number;
 }) => {
-  const quoteResponse = await getQuote({ inputMint, outputMint, amount, slippageBps });
+  const quote = await getQuote({ inputMint, outputMint, amount, slippageBps });
+
+  if (!quote.success) {
+    throw new Error(quote.message);
+  }
 
   return (
     <div className='flex flex-col justify-start items-stretch gap-2 border p-2 rounded-xl h-96'>
       <h2 className='text-lg font-semibold'>Visualization</h2>
 
       <div className='flex-1'>
-        {quoteResponse.success && quoteResponse.data ? (
-          <VisualizerRenderer data={quoteResponse.data} />
+        {quote.data ? (
+          <VisualizerRenderer
+            data={quote?.data}
+            inputMint={inputMint}
+            outputMint={outputMint}
+          />
         ) : (
           <p className='text-gray-500 text-center'>No data available. Please select tokens and enter an amount.</p>
         )}

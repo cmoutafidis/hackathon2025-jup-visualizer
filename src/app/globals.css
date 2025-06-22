@@ -173,3 +173,8 @@
     @apply bg-accent text-accent-foreground;
   }
 }
+
+.start-node .react-flow__handle-source,
+.end-node .react-flow__handle-target {
+  display: none;
+}
