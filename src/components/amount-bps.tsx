@@ -43,7 +43,12 @@ const AmountBps = ({ inputMint, searchParams }: { inputMint: TToken | undefined;
           />
         </div>
         <div className='space-y-2 flex-1 border py-3 px-3 dark:bg-input/30 rounded-md shadow-xs'>
-          <Label htmlFor='slippage'>Slippage BPS</Label>
+          <div className='flex justify-between items-start gap-4'>
+            <Label htmlFor='slippage'>Slippage BPS</Label>
+            <div className='text-lg font-medium text-primary'>
+              {slippageBps} ({Number(slippageBps) / 100}%)
+            </div>
+          </div>
           <Slider
             value={[Number(slippageBps)]}
             onValueChange={(value) => setSlippageBps(String(value[0]))}

@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Jup Visualizer
 
-## Getting Started
+> **Built in Namaste Jupiverse - Hackathon Edition (HYD)!**
 
-First, run the development server:
+A cutting-edge, real-time swap route visualizer for Jupiter DEX that transforms complex DeFi transactions into beautiful, interactive flow diagrams. Watch your swaps come to life with animated route visualization, real-time quotes, and a modern, intuitive interface.
+
+## ✨ Features
+
+### 🎯 Core Functionality
+
+- **Interactive Route Visualization**: Beautiful DAG (Directed Acyclic Graph) visualization of swap routes using React Flow
+- **Token Selection**: Browse and select from Jupiter's comprehensive token list
+- **Amount & Slippage Control**: Fine-tune your swap parameters with precision
+
+### 🎨 Visual Experience
+
+- **Animated Flow Diagrams**: Watch your swap route animate from input to output
+- **Token Details Display**: See input/output tokens with names, symbols, and amounts
+- **Route Breakdown**: Each hop shows AMM, amounts, fees, and percentage allocation
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Dark/Light Mode**: Built-in theme switching for optimal viewing
+
+### 🔧 Technical Highlights
+
+- **Server Actions**: Lightning-fast API calls with Next.js 15 server actions
+- **Type Safety**: Full TypeScript implementation for rock-solid reliability
+- **Modern UI**: Built with Radix UI primitives and Tailwind CSS
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **UI Components**: Radix UI primitives
+- **Visualization**: React Flow (@xyflow/react)
+- **HTTP Client**: Axios
+- **Package Manager**: pnpm
+- **Deployment**: Vercel-ready
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) or npm
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Clone the repository
+git clone <your-repo-url>
+cd jup
+
+# Install dependencies
+pnpm install
+
+# Start the development server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the magic happen! ✨
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎮 How to Use
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Select Tokens**: Choose your input and output tokens from the dropdown
+2. **Enter Amount**: Specify how much you want to swap
+3. **Adjust Slippage**: Set your preferred slippage tolerance (default: 0.5%)
+4. **Watch the Magic**: See your swap route visualization!
 
-## Learn More
+## 🔗 API Integration
 
-To learn more about Next.js, take a look at the following resources:
+This project integrates with Jupiter's public APIs:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Token List**: `https://token.jup.ag/strict`
+- **Quote API**: `https://lite-api.jup.ag/swap/v1/quote`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── actions/          # Server actions for API calls
+├── app/             # Next.js app router pages
+├── components/      # React components
+│   ├── ui/         # Reusable UI primitives
+│   └── ...         # Feature components
+├── lib/            # Utility functions
+├── providers/      # React context providers
+└── types/          # TypeScript type definitions
+```
