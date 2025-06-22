@@ -38,7 +38,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className='mx-auto py-20 min-h-svh flex flex-col justify-center items-stretch container'>
+          <main className='mx-auto py-20 h-svh flex flex-col justify-center items-stretch container gap-4'>
             <Hero />
             {children}
           </main>

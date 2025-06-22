@@ -1,65 +1,108 @@
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+'use client';
+
+import React, { useMemo } from 'react';
+import { ReactFlow, Node, Edge, Position, Controls, MiniMap } from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
+
+import { formatAmount } from '@/lib/utils';
 import { TRoutePlan, TSwapQuote } from '@/types/global';
-import { Fragment } from 'react';
 
-const formatAmount = (amount: string, decimals = 6) => (Number(amount) / 10 ** decimals).toFixed(4);
+export default function VisualizerRenderer({ data }: { data: TSwapQuote }) {
+  const { nodes, edges } = useMemo(() => {
+    const nodes: Node[] = [];
+    const edges: Edge[] = [];
 
-const VisualizerRenderer = ({ data }: { data: TSwapQuote }) => {
-  return (
-    <div className='flex justify-between items-center gap-3'>
-      {data.routePlan.map((item: TRoutePlan, index: number) => (
-        <Fragment key={index}>
-          <Tooltip>
-            <TooltipTrigger className='border rounded-full px-4 py-3 shadow hover:bg-muted focus:outline-none'>
-              <div className='text-sm font-semibold text-center truncate w-24'>{item.swapInfo.label}</div>
-              <div className='text-xs text-muted-foreground text-center'>{item.percent}%</div>
-            </TooltipTrigger>
-
-            <TooltipContent
-              className='text-sm max-w-sm p-3 rounded-md border shadow-md bg-background'
-              tooltipArrowClassName='bg-background fill-background shadow-md'
-            >
-              <div className='space-y-1'>
-                <div className='font-semibold text-base mb-1'>{item.swapInfo.label}</div>
-
-                <div className='flex justify-between text-xs text-muted-foreground'>
-                  <span>AMM Key</span>
-                  <span className='text-right break-all text-muted-foreground'>{item.swapInfo.ammKey}</span>
-                </div>
-
-                <div className='flex justify-between text-xs text-muted-foreground'>
-                  <span>Input Mint</span>
-                  <span className='text-right break-all text-muted-foreground'>{item.swapInfo.inputMint}</span>
-                </div>
-
-                <div className='flex justify-between text-xs text-muted-foreground'>
-                  <span>Output Mint</span>
-                  <span className='text-right break-all text-muted-foreground'>{item.swapInfo.outputMint}</span>
-                </div>
-
-                <div className='flex justify-between'>
-                  <span className='font-medium'>Input Amt</span>
-                  <span>{formatAmount(item.swapInfo.inAmount)}</span>
-                </div>
-
-                <div className='flex justify-between'>
-                  <span className='font-medium'>Output Amt</span>
-                  <span>{formatAmount(item.swapInfo.outAmount)}</span>
-                </div>
-
-                <div className='flex justify-between'>
-                  <span className='font-medium'>Fee</span>
-                  <span>{formatAmount(item.swapInfo.feeAmount)}</span>
-                </div>
+    data.routePlan.forEach((item: TRoutePlan, index: number) => {
+      const id = `${index}`;
+      nodes.push({
+        id,
+        position: { x: index * 200, y: 0 },
+        sourcePosition: Position.Right,
+        targetPosition: Position.Left,
+        data: {
+          label: (
+            <div className='text-xs text-left'>
+              <div className='flex justify-between items-center gap-4'>
+                <span className='font-bold text-lg truncate'>{item.swapInfo.label}</span>
+                <span className='text-muted-foreground'>{item.percent}%</span>
               </div>
-            </TooltipContent>
-          </Tooltip>
 
-          {index !== data.routePlan.length - 1 && <div className='flex-1 bg-neutral-200 h-px' />}
-        </Fragment>
-      ))}
+              {/* <div className='flex justify-between items-center gap-2'>
+                <span>AMM: </span>
+                <span className='truncate'>{item.swapInfo.ammKey}</span>
+              </div>
+              <div className='flex justify-between items-center gap-2'>
+                <span>Input: </span>
+                <span className='truncate'>{item.swapInfo.inputMint}</span>
+              </div>
+              <div className='flex justify-between items-center gap-2'>
+                <span>Output: </span>
+                <span className='truncate'>{item.swapInfo.outputMint}</span>
+              </div> */}
+              <div className='flex justify-between items-center gap-2'>
+                <span>In Amt: </span>
+                <span>{formatAmount(item.swapInfo.inAmount)}</span>
+              </div>
+              <div className='flex justify-between items-center gap-2'>
+                <span>Out Amt: </span>
+                <span>{formatAmount(item.swapInfo.outAmount)}</span>
+              </div>
+              <div className='flex justify-between items-center gap-2'>
+                <span>Fee: </span>
+                <span> {formatAmount(item.swapInfo.feeAmount)}</span>
+              </div>
+            </div>
+          ),
+        },
+        style: {
+          width: 180,
+          overflowWrap: 'break-word',
+          border: '1px solid var(--border)',
+          padding: 10,
+          borderRadius: 'var(--radius)',
+          background: 'var(--card)',
+          color: 'var(--card-foreground)',
+        },
+      });
+
+      if (index > 0) {
+        edges.push({
+          id: `e${index - 1}-${index}`,
+          source: `${index - 1}`,
+          target: id,
+          animated: true,
+          style: {
+            stroke: 'var(--primary)',
+          },
+        });
+      }
+    });
+
+    return { nodes, edges };
+  }, [data]);
+
+  return (
+    <div className='w-full h-full border rounded-lg'>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        fitView
+      >
+        <Controls
+          style={{
+            backgroundColor: 'var(--background)',
+          }}
+        />
+        <MiniMap
+          style={{
+            backgroundColor: 'var(--background)',
+            border: '1px solid var(--border)',
+          }}
+          nodeColor='var(--primary)'
+          nodeStrokeColor='var(--border)'
+          maskColor='var(--secondary)'
+        />
+      </ReactFlow>
     </div>
   );
-};
-
-export default VisualizerRenderer;
+}

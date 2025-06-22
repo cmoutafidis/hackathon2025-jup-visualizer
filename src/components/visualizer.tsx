@@ -16,8 +16,8 @@ const Visualizer = async ({
   const quoteResponse = await getQuote({ inputMint, outputMint, amount, slippageBps });
 
   return (
-    <div className='flex flex-col justify-start items-stretch gap-4 border p-4 rounded-xl h-52'>
-      <h2 className='text-lg font-semibold mb-4'>Visualization</h2>
+    <div className='flex flex-col justify-start items-stretch gap-2 border p-2 rounded-xl h-96'>
+      <h2 className='text-lg font-semibold'>Visualization</h2>
 
       <div className='flex-1'>
         {quoteResponse.success && quoteResponse.data ? (

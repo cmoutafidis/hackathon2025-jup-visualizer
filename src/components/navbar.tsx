@@ -3,7 +3,7 @@ import { Link } from '@/components/ui/link';
 
 const Navbar = () => {
   return (
-    <div className='h-16 border shadow-sm flex justify-center items-center gap-2 w-full fixed'>
+    <div className='h-16 border-b shadow-sm flex justify-center items-center gap-2 w-full fixed bg-background'>
       <nav className='container mx-auto flex justify-between items-center gap-2'>
         <Link
           href='/'

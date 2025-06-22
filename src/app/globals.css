@@ -165,4 +165,11 @@
     color: transparent;
     -webkit-text-fill-color: transparent;
   }
+
+  .react-flow__controls-button {
+    @apply bg-card text-card-foreground border rounded-sm border-border;
+  }
+  .react-flow__controls-button:hover {
+    @apply bg-accent text-accent-foreground;
+  }
 }

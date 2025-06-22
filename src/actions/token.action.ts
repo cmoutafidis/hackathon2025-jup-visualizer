@@ -10,7 +10,7 @@ export const getTokens = async (): Promise<TAPIResponse<TToken[]>> => {
 
     return {
       success: true,
-      data: data.slice(0, 10) ?? [],
+      data: data ?? [],
       message: 'Tokens fetched successfully',
     };
   } catch (error) {

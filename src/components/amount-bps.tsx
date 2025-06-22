@@ -30,29 +30,31 @@ const AmountBps = ({ inputMint, searchParams }: { inputMint: TToken | undefined;
   return (
     <div className='space-y-4 border p-4 rounded-xl flex-1'>
       <h1 className='text-lg font-semibold'>Swap</h1>
-      <div className='space-y-2'>
-        <Label htmlFor='amount'>Amount</Label>
-        <Input
-          id='amount'
-          placeholder='Enter amount'
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          rightElement={inputMint?.symbol ?? '---'}
-          rightElementClassName='text-sm text-muted-foreground pr-2'
-        />
-      </div>
-      <div className='space-y-2'>
-        <Label htmlFor='slippage'>Slippage BPS</Label>
-        <Slider
-          value={[Number(slippageBps)]}
-          onValueChange={(value) => setSlippageBps(String(value[0]))}
-          min={10}
-          max={100}
-          step={10}
-        />
-        <div className='flex justify-between text-xs text-muted-foreground'>
-          <span>10</span>
-          <span>100</span>
+      <div className='flex justify-center items-end gap-4'>
+        <div className='space-y-2 flex-1'>
+          <Label htmlFor='amount'>Amount</Label>
+          <Input
+            id='amount'
+            placeholder='Enter amount'
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            rightElement={inputMint?.symbol ?? '---'}
+            rightElementClassName='text-sm text-muted-foreground pr-2'
+          />
+        </div>
+        <div className='space-y-2 flex-1 border py-3 px-3 dark:bg-input/30 rounded-md shadow-xs'>
+          <Label htmlFor='slippage'>Slippage BPS</Label>
+          <Slider
+            value={[Number(slippageBps)]}
+            onValueChange={(value) => setSlippageBps(String(value[0]))}
+            min={10}
+            max={100}
+            step={10}
+          />
+          <div className='flex justify-between text-xs text-muted-foreground'>
+            <span>10</span>
+            <span>100</span>
+          </div>
         </div>
       </div>
     </div>

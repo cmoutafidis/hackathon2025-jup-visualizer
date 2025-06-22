@@ -1,4 +1,5 @@
 import { getTokens } from '@/actions/token.action';
+
 import SwapCard from '@/components/swap-card';
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
