@@ -2,7 +2,7 @@
 
 > **Built in Namaste Jupiverse - Hackathon Edition (HYD)!**
 
-A cutting-edge, real-time swap route visualizer for Jupiter DEX that transforms complex DeFi transactions into beautiful, interactive flow diagrams. Watch your swaps come to life with animated route visualization, real-time quotes, and a modern, intuitive interface.
+A cutting-edge swap route visualizer for Jupiter DEX that transforms complex DeFi transactions into beautiful, interactive flow diagrams. Watch your swaps come to life with animated route visualization, quotes, and a modern, intuitive interface.
 
 ## ✨ Features
 
